@@ -139,6 +139,7 @@ const listProducts =
           }
           if(Array.isArray(bData)){
              resultbData.push({ brand : brand , data : bData });
+             console.log("resultbData set for brand " + brand); 
          }
       }
       }
@@ -147,13 +148,14 @@ const listProducts =
       if(keyword !== ''){
         keywordData = resultbData.filter((item) =>  item.brand === keyword
       );
+      console.log("keywordData set for brand " + keyword); 
       }
       else {
         keywordData = resultbData;
       }
       let pro = { products : sampleProductDataArray , pages :0 , page:1};
       if(keywordData.length > 0 && keywordData[0].data !==undefined ){
-      console.log(keywordData[0].data); 
+        console.log(keywordData[0].data); 
         pro = { products : keywordData[0].data };
        }
       //let pro = { products : keywordData[0].data  , pages :1 , page:1};
