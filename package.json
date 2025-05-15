@@ -27,7 +27,7 @@
   "scripts": {
     "clean": "rm -rf build/static",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && npm install && npm run clean && react-scripts start",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && npm run clean && react-scripts build",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && npm install && npm run clean && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
