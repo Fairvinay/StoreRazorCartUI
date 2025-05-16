@@ -36,8 +36,7 @@ console.log('🚮 Deleting old static files in /public/static...');
 //fs.removeSync(destination);
 
 console.log('📂 Copying new build to /public...');
-fs.copySync(source, destination);
-
+fs.copySync(source, destination,{ overwrite: true });
 console.log('✅ Build moved successfully!');
 
 console.log('✅ Build copied to public');
