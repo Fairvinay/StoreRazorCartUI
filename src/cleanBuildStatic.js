@@ -12,7 +12,7 @@ const buildIndexHtml = path.join(buildStaticDir, 'index.html');
 try {
   if (fs.existsSync(staticDir)) {
     //fs.removeSync(staticDir);
-    fs.rmSync(publicStatic, { recursive: true, force: true });
+    fs.rmSync(staticDir, { recursive: true, force: true });
     console.log('✅ Deleted old public/static');
   } else {
     console.log('ℹ️ No public/static to delete');
