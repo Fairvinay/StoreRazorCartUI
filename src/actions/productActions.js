@@ -24,7 +24,7 @@ import {
   PRODUCT_FILTER_SUCCESS,
 } from "../constants/productConstants";
 import axios from "axios";
-
+import { API_URL } from '../config';
 let default_keyword = "vivo";
 
 function isJsonString(str) {
@@ -52,7 +52,7 @@ const promises = [];
 
 for (const brand of brands) {
   for (const page of pages) {
-    const url =process.env.REACT_APP_SERVER_URL+`/data/${brand}PageDetail${page}.json`; // relative path
+    const url =API_URL+`/data/${brand}PageDetail${page}.json`; // relative path
     promises.push(
       axios.get(url).then(res => ({
         brand,
@@ -90,7 +90,7 @@ const listProducts =
       dispatch({ type: PRODUCT_LIST_REQUEST });
       default_keyword = keyword;
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER_URL+`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        API_URL+`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
       );
 
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
@@ -188,7 +188,7 @@ const topRatedProducts = () => async dispatch => {
   try {
     dispatch({ type: PRODUCT_TOP_RATED_REQUEST });
 
-    const { data } = await axios.get(process.env.REACT_APP_SERVER_URL+`/api/products/toprated`);
+    const { data } = await axios.get(API_URL+`/api/products/toprated`);
 
     dispatch({ type: PRODUCT_TOP_RATED_SUCCESS, payload: data });
   } catch (error) {
@@ -275,7 +275,7 @@ const filterProduct =
       });
 
       const { data } = await axios.get(
-        process.env.REACT_APP_SERVER_URL+`/api/products/filter?rating=${rating}&price=${price}&brand=${brand}&category=${category}`
+        API_URL+`/api/products/filter?rating=${rating}&price=${price}&brand=${brand}&category=${category}`
       );
 
       dispatch({
@@ -297,7 +297,7 @@ const listProductDetail = id => async dispatch => {
   try {
     dispatch({ type: PRODUCT_DETAIL_REQUEST });
 
-    const { data } = await axios.get(process.env.REACT_APP_SERVER_URL+`/api/products/${id}`);
+    const { data } = await axios.get(API_URL+`/api/products/${id}`);
     dispatch({ type: PRODUCT_DETAIL_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -325,7 +325,7 @@ const createProduct = () => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.post(process.env.REACT_APP_SERVER_URL+`/api/products`, {}, config);
+    const { data } = await axios.post(API_URL+`/api/products`, {}, config);
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
@@ -356,7 +356,7 @@ const updateProduct = (product, id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(process.env.REACT_APP_SERVER_URL+`/api/products/${id}`, product, config);
+    const { data } = await axios.put(API_URL+`/api/products/${id}`, product, config);
 
     dispatch({
       type: PRODUCT_UPDATE_SUCCESS,
@@ -386,7 +386,7 @@ const deleteProduct = id => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    await axios.delete(process.env.REACT_APP_SERVER_URL+`/api/products/${id}`, config);
+    await axios.delete(API_URL+`/api/products/${id}`, config);
 
     dispatch({
       type: PRODUCT_DELETE_SUCCESS,
@@ -417,7 +417,7 @@ const createReview = (review, id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      process.env.REACT_APP_SERVER_URL+`/api/products/${id}/review`,
+      API_URL+`/api/products/${id}/review`,
       {
         rating: review.rating,
         comment: review.comment,

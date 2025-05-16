@@ -43,7 +43,7 @@ import {
 } from "../constants/orderConstants";
 import { __STORENOTIFY_USERINFO } from "../constants/localStrorageConstant";
 import axios from "axios";
-
+import { API_URL } from '../config';
 const login = (email, password) => async dispatch => {
   try {
     dispatch({
@@ -54,7 +54,7 @@ const login = (email, password) => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(process.env.REACT_APP_SERVER_URL+
+    const { data } = await axios.post(API_URL+
       "/api/user/login",
       { email, password },
       config
@@ -87,7 +87,7 @@ const forgotPassword = email => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(process.env.REACT_APP_SERVER_URL+
+    const { data } = await axios.post(API_URL+
       "/api/user/forgotpassword",
       { email },
       config
@@ -118,7 +118,7 @@ const resetPassword = (resetToken, password) => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.put(process.env.REACT_APP_SERVER_URL+
+    const { data } = await axios.put(API_URL+
       "/api/user/resetpassword",
       { resetToken, password },
       config
@@ -156,7 +156,7 @@ const register = (name, email, password) => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(process.env.REACT_APP_SERVER_URL+
+    const { data } = await axios.post(API_URL+
       "/api/user/register",
       { name, email, password },
       config
@@ -199,7 +199,7 @@ const getUserDetails = id => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(process.env.REACT_APP_SERVER_URL+`/api/user/${id}`, config);
+    const { data } = await axios.get(API_URL+`/api/user/${id}`, config);
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
@@ -229,7 +229,7 @@ const updateUserProfile = user => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.put(process.env.REACT_APP_SERVER_URL+`/api/user/profile`, user, config);
+    const { data } = await axios.put(API_URL+`/api/user/profile`, user, config);
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -268,7 +268,7 @@ const getUserList = () => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.get(process.env.REACT_APP_SERVER_URL+"/api/user/users", config);
+    const { data } = await axios.get(API_URL+"/api/user/users", config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -300,7 +300,7 @@ const getUserDetailAdmin = id => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(process.env.REACT_APP_SERVER_URL+`/api/user/users/${id}`, config);
+    const { data } = await axios.get(API_URL+`/api/user/users/${id}`, config);
     dispatch({
       type: GET_USER_ADMIN_SUCCESS,
       payload: data,
@@ -330,7 +330,7 @@ const updateUserDetailAdmin = (user, id) => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.put(process.env.REACT_APP_SERVER_URL+`/api/user/users/${id}`, user, config);
+    const { data } = await axios.put(API_URL+`/api/user/users/${id}`, user, config);
 
     dispatch({
       type: UPDATE_USER_ADMIN_SUCCESS,
@@ -366,7 +366,7 @@ const deleteUser = id => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    await axios.delete(process.env.REACT_APP_SERVER_URL+`/api/user/users/${id}`, config);
+    await axios.delete(API_URL+`/api/user/users/${id}`, config);
 
     dispatch({
       type: USER_ADMIN_DELETE_SUCCESS,

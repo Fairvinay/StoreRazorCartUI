@@ -19,6 +19,7 @@ import {
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
 import Title from "../components/Title";
+import { API_URL } from '../config';
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const OrderScreen = () => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.post(process.env.REACT_APP_SERVER_URL+`/api/orders/${id}`, "", authConfig);
+    const { data } = await axios.post(API_URL+`/api/orders/${id}`, "", authConfig);
     const { amount, currency, orderId } = data;
 
     const options = {
