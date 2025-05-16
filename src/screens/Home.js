@@ -101,7 +101,7 @@ const Home = () => {
       <Title title="Store Notify | Home" />
       {products && (
         <>
-          {!keywords && <Slider />}
+          {!keywords }   {/*&& <Slider />*/}
           <h1>Latest Products</h1>
           {loading ? (
             <Loader />
