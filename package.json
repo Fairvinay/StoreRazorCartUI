@@ -32,7 +32,7 @@
     "clean": "rm -rf build",
     "clear": "node src/cleanBuildStatic.js",
     "move": "node src/moveBuildtoPublic.js",
-     "rebuild": "export NODE_OPTIONS=--openssl-legacy-provider && npm run clear && npm run build && npm run move",
+     "rebuild": "export NODE_OPTIONS=--openssl-legacy-provider && npm install && npm run clear && npm run build && npm run move",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider &&   react-scripts start",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && npm install &&  react-scripts build  ",
     "test": "react-scripts test",
