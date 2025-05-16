@@ -14,7 +14,7 @@ const Slider = () => {
   }, [dispatch]);
 
   const topProd = useSelector(state => state.productTopRated);
-  const { loading, error, products } = topProd;
+  const { loading, error, products = []  } = topProd;
   return loading ? (
     <Loader />
   ) : error ? (
