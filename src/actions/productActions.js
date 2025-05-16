@@ -227,7 +227,7 @@ const topRatedProducts = () => async dispatch => {
     else {
       keywordData = resultbData;
     }
-    let pro = { products : [] , pages :0 , page:1};
+    let pro = { products : sampleProductDataArray , pages :0 , page:1};
     if(keywordData.length > 0 && keywordData[0].data !==undefined ){
     console.log(keywordData[0].data); 
       pro = { products : keywordData[0].data };
@@ -237,7 +237,7 @@ const topRatedProducts = () => async dispatch => {
 
     
     console.log("TOP RATED   "+ pro.products); 
-    dispatch({ type: PRODUCT_TOP_RATED_SUCCESS, payload: pro });
+    dispatch({ type: PRODUCT_TOP_RATED_SUCCESS, payload: pro.products });
 
     if( pro == undefined && pro == null){
       if (keywordData.length === 0) {
