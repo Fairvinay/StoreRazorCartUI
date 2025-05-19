@@ -1,10 +1,10 @@
 // App.js or a top-level component
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import  { useEffect } from 'react';
+//import { useDispatch } from 'react-redux';
 import { loadStaticModels } from './reducers/data/loadStaticModels';
 
 const InitLoader = ({ store }) => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   useEffect(() => {
     //dispatch(loadStaticModels());

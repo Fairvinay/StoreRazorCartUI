@@ -18,6 +18,7 @@ const ProtectedLink = ({ children, urlToProtect ,isAllowed }) => {
    if (u  !== null && u !== undefined) {
      try {
         u = JSON.parse(u);
+        console.error("  user object in localStorage present ");
         if (!u.token) {
         // alert("Please login to access this page.");
         // history.push("/requestlogin");
@@ -30,7 +31,7 @@ const ProtectedLink = ({ children, urlToProtect ,isAllowed }) => {
     
   },[])
   const handleClick = (e) => {
-    if (!selfAllowed) {
+    if (!checkAllow()) {
 
       e.preventDefault(); // Stop navigation
       alert("Please login to access this page.");
@@ -38,7 +39,26 @@ const ProtectedLink = ({ children, urlToProtect ,isAllowed }) => {
         history.push(urlToProtect);
     }
   };
-
+  const checkAllow = () => {
+    let allowed = false;
+    let u  = localStorage.getItem(__STORENOTIFY_USERINFO);
+    if (u  !== null && u !== undefined && !selfAllowed) {
+      try {
+         u = JSON.parse(u);
+         console.error("  user object in localStorage present ");
+         if (u.token) {
+         // alert("Please login to access this page.");
+         // history.push("/requestlogin");
+         setSelfAllowed(true);
+         allowed = true;
+         }
+      } catch (e) {
+         console.error("Invalid user object in localStorage");
+         allowed = false;
+       }
+       return allowed ;
+     }  
+  };
   return (
     <Link to={urlToProtect} onClick={handleClick}>
        {children}

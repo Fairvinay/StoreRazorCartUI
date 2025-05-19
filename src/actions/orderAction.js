@@ -19,10 +19,12 @@ import {
   ORDER_UPDATE_SUCCESS,
 } from "../constants/orderConstants";
 import axios from "axios";
-import { API_URL } from '../config';
+//import { API_URL } from '../config';
 import { CART_ITEM_RESET } from "../constants/cartConstants";
 import { __STORENOTIFY_CARTITEMS } from "../constants/localStrorageConstant";
 const createOrder = order => async (dispatch, getState) => {
+  const { apiConfig } = getState();
+  const apiUrl = apiConfig.apiUrl;
   try {
     dispatch({
       type: ORDER_CREATE_REQUEST,
@@ -37,7 +39,7 @@ const createOrder = order => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post("/api/orders", order, config);
+    const { data } = await axios.post(`${apiUrl}/api/orders`, order, config); //"/api/orders"
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -56,6 +58,8 @@ const createOrder = order => async (dispatch, getState) => {
 
 const getOrderDetails = id => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: ORDER_DETAILS_REQUEST,
     });
@@ -66,7 +70,7 @@ const getOrderDetails = id => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(API_URL+`/api/orders/${id}`, config);
+    const { data } = await axios.get(`${apiUrl}/api/orders/${id}`, config);
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -85,6 +89,8 @@ const getOrderDetails = id => async (dispatch, getState) => {
 
 const payOrder = (id, paymentResult) => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: ORDER_PAY_REQUEST,
     });
@@ -98,7 +104,7 @@ const payOrder = (id, paymentResult) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      API_URL+`/api/orders/${id}/pay`,
+      `${apiUrl}/api/orders/${id}/pay`,
       paymentResult,
       config
     );
@@ -126,6 +132,8 @@ const payOrder = (id, paymentResult) => async (dispatch, getState) => {
 
 const getMyOrder = () => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: MY_ORDER_REQUEST,
     });
@@ -138,7 +146,7 @@ const getMyOrder = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get("/api/orders/myorders", config);
+    const { data } = await axios.get(`${apiUrl}/api/orders/myorders`, config);
 
     dispatch({
       type: MY_ORDER_SUCCESS,
@@ -158,6 +166,8 @@ const getMyOrder = () => async (dispatch, getState) => {
 // Admin Roles
 const listOrders = () => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: ORDER_GET_REQUEST,
     });
@@ -169,7 +179,7 @@ const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get("/api/orders", config);
+    const { data } = await axios.get(`${apiUrl}/api/orders`, config);
 
     dispatch({
       type: ORDER_GET_SUCCESS,
@@ -188,6 +198,8 @@ const listOrders = () => async (dispatch, getState) => {
 
 const updateOrder = (isDelivered, id) => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: ORDER_UPDATE_REQUEST,
     });
@@ -202,7 +214,7 @@ const updateOrder = (isDelivered, id) => async (dispatch, getState) => {
 
     console.log(isDelivered);
     console.log(id);
-    const { data } = await axios.put(API_URL+`/api/orders/${id}`, isDelivered, config);
+    const { data } = await axios.put(`${apiUrl}/api/orders/${id}`, isDelivered, config);
 
     dispatch({
       type: ORDER_UPDATE_SUCCESS,

@@ -28,12 +28,14 @@ const LoginScreen = () => {
       history.push(redirect);
     }
   }, [history, userInfo, redirect]);
-
-  const submitHandler = e => {
+  const handleLoginClick = () => {
+    dispatch(login(email, password));
+  };
+ /* const submitHandler = e => {
     e.preventDefault();
 
     dispatch(login(email, password));
-  };
+  };*/
   return (
     <>
       <Title title="Store Notify| Log-In" />
@@ -41,7 +43,7 @@ const LoginScreen = () => {
         <h1>Sign In</h1>
         {error && <Message variant="danger">{error}</Message>}
         {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
+        <Form  >
           <Form.Group controlId="email">
             <Form.Label>Enter your email</Form.Label>
             <Form.Control
@@ -62,7 +64,7 @@ const LoginScreen = () => {
               required
             ></Form.Control>
           </Form.Group>
-          <Button type="submit" className="btn-custom" variant="primary">
+          <Button type="button"  onClick={handleLoginClick} className="btn-custom" variant="primary">
             Sign In
           </Button>
         </Form>

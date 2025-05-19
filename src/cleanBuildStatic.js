@@ -5,9 +5,16 @@ const publicDir = path.join(__dirname, '..', 'public');
 const staticDir = path.join(publicDir, 'static');
 const indexHtml = path.join(publicDir, 'index.html');
 
+const headerDir = path.join(__dirname, '.');
+//const _headers = path.join(headerDir, '_headers');
+const fileHeaders =  path.resolve(headerDir,'_headers' );
+const fileRedirects = path.resolve(headerDir,'_redirects' );//path.join(headerDir, '_redirects');
+
 const buildDir = path.join(__dirname, '..', 'build');
 const buildStaticDir = path.join(buildDir, 'static');
 const buildIndexHtml = path.join(buildStaticDir, 'index.html');
+
+
 
 try {
   if (fs.existsSync(staticDir)) {
@@ -38,9 +45,21 @@ try {
   } else {
     console.log('ℹ️ No build/index.html to delete');
   }
-
+// Copy _headers and _redirects to build directory
+copyFileIfExists(fileHeaders, path.join(buildDir, '_headers'));
+copyFileIfExists(fileRedirects, path.join(buildDir, '_redirects'));
 
 } catch (err) {
   console.error('❌ Error clearing old static files:', err);
   process.exit(1);
 }
+
+// Utility to copy a file if it exists
+function copyFileIfExists(source, destination) {
+    if (fs.existsSync(source)) {
+      fs.copyFileSync(source, destination);
+      console.log(`✔ Copied ${path.basename(source)} to ${destination}`);
+    } else {
+      console.warn(`⚠ File not found: ${source}`);
+    }
+  }

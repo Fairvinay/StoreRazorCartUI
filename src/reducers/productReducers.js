@@ -28,7 +28,7 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from "../constants/productConstants";
 
-const loadInitial = {}
+//const loadInitial = {}
 
 const productListReducer = (state = { products: [] }, action) => {
   switch (action.type) {

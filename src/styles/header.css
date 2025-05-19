@@ -2,14 +2,20 @@
     background-color: #f0f0f0; /* light gray or any pastel */
     color: #212529;
   }
+.a-headerText {
+  font-size: 26px;
+}
+.a-navBarLink {
+  font-size: 19px;
+}
 #username {
   font-weight: 800;  
   color: #0831ff;
-  
+ /* font-size: 26px;*/
   font-family: Nunito, sans-serif;
 }
 #signin { 
-
+ /* font-size: 26px;*/
   color: #06aaeb;
   font-weight: 800;  
   font-family: Nunito, sans-serif;

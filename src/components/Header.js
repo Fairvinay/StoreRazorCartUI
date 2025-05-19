@@ -20,12 +20,12 @@ const Header = () => {
   variant="light"  expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand style={{ color: '#a5fffc' }} ><span  style={{ color: '#0831ff' , fontWeight: '800' ,fontFamily: 'Nunito, sans-serif' } }>Store Notify</span></Navbar.Brand>
+            <Navbar.Brand style={{ color: '#a5fffc' }} ><span  style={{ color: '#0831ff' ,fontSize: '26px', fontWeight: '800' ,fontFamily: 'Nunito, sans-serif' } }>Store Notify</span></Navbar.Brand>
           </LinkContainer>
           <SearchBox />
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse>
-            <Nav  className="ml-auto">
+            <Nav  className="ml-auto a-navBarLink">
               <LinkContainer to="/cart">
                 <Nav.Link >
                   <i style={{ color: '#0831ff' } } className="fas fa-shopping-cart"></i><span  style={{ color: '#0831ff' } }>Cart</span>

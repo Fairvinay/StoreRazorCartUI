@@ -9,8 +9,10 @@ const Filter = ({ products }) => {
   let brandArr = [];
 
   products.forEach(({ category, brand }) => {
+    if( category !== undefined && brand !== undefined){
     categoryArr.push(category.toLowerCase());
     brandArr.push(brand.toLowerCase());
+    }
   });
 
   function uniqueArr(arr) {

@@ -1,0 +1,5 @@
+/*    /index.html   200
+
+#/api/* https://sheer-maryjo-storenotify-4c573750.koyeb.app/:splat 200!
+# Redirect path /api to https://sheer-maryjo-storenotify-4c573750.koyeb.app
+#/api/* https://sheer-maryjo-storenotify-4c573750.koyeb.app  302!

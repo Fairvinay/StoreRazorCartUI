@@ -55,7 +55,7 @@ const ProductDetails = () => {
       });
     }
   
-  }, [id, dispatch, success]);
+  }, [id, dispatch, success, history]);
   const [qty, setQty] = useState(1);
 
   const addCartHandler = () => {

@@ -43,8 +43,10 @@ import {
 } from "../constants/orderConstants";
 import { __STORENOTIFY_USERINFO } from "../constants/localStrorageConstant";
 import axios from "axios";
-import { API_URL } from '../config';
-const login = (email, password) => async dispatch => {
+//import { API_URL } from '../config';
+const login = (email, password) => async (dispatch,getState) => {
+  const { apiConfig } = getState();
+  const apiUrl = apiConfig.apiUrl;
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -54,8 +56,7 @@ const login = (email, password) => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(API_URL+
-      "/api/user/login",
+    const { data } = await axios.post(`${apiUrl}/api/user/login`,
       { email, password },
       config
     );
@@ -77,7 +78,9 @@ const login = (email, password) => async dispatch => {
   }
 };
 
-const forgotPassword = email => async dispatch => {
+const forgotPassword = email => async (dispatch,getState) => {
+  const { apiConfig } = getState();
+  const apiUrl = apiConfig.apiUrl;
   try {
     dispatch({
       type: USER_FORGOT_PASSWORD_REQUEST,
@@ -87,8 +90,7 @@ const forgotPassword = email => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(API_URL+
-      "/api/user/forgotpassword",
+    const { data } = await axios.post(`${apiUrl}/api/user/forgotpassword`,
       { email },
       config
     );
@@ -108,8 +110,10 @@ const forgotPassword = email => async dispatch => {
   }
 };
 
-const resetPassword = (resetToken, password) => async dispatch => {
+const resetPassword = (resetToken, password) => async  (dispatch,getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: USER_RESET_PASSWORD_RESET,
     });
@@ -118,7 +122,7 @@ const resetPassword = (resetToken, password) => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.put(API_URL+
+    const { data } = await axios.put(apiUrl+
       "/api/user/resetpassword",
       { resetToken, password },
       config
@@ -146,8 +150,10 @@ const resetPassword = (resetToken, password) => async dispatch => {
   }
 };
 
-const register = (name, email, password) => async dispatch => {
+const register = (name, email, password) => async (dispatch,getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: USER_REGISTER_REQUEST,
     });
@@ -156,7 +162,7 @@ const register = (name, email, password) => async dispatch => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(API_URL+
+    const { data } = await axios.post(apiUrl+
       "/api/user/register",
       { name, email, password },
       config
@@ -186,6 +192,8 @@ const register = (name, email, password) => async dispatch => {
 
 const getUserDetails = id => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: USER_DETAILS_REQUEST,
     });
@@ -199,7 +207,7 @@ const getUserDetails = id => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(API_URL+`/api/user/${id}`, config);
+    const { data } = await axios.get(apiUrl+`/api/user/${id}`, config);
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
@@ -217,6 +225,8 @@ const getUserDetails = id => async (dispatch, getState) => {
 
 const updateUserProfile = user => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: USER_UPDATE_PROFILE_REQUEST,
     });
@@ -229,7 +239,7 @@ const updateUserProfile = user => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.put(API_URL+`/api/user/profile`, user, config);
+    const { data } = await axios.put(apiUrl+`/api/user/profile`, user, config);
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -256,6 +266,8 @@ const updateUserProfile = user => async (dispatch, getState) => {
 // Admin Actions
 const getUserList = () => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: USER_LIST_REQUEST,
     });
@@ -268,7 +280,7 @@ const getUserList = () => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.get(API_URL+"/api/user/users", config);
+    const { data } = await axios.get(apiUrl+"/api/user/users", config);
 
     dispatch({
       type: USER_LIST_SUCCESS,
@@ -287,6 +299,8 @@ const getUserList = () => async (dispatch, getState) => {
 
 const getUserDetailAdmin = id => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: GET_USER_ADMIN_REQUEST,
     });
@@ -300,7 +314,7 @@ const getUserDetailAdmin = id => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(API_URL+`/api/user/users/${id}`, config);
+    const { data } = await axios.get(apiUrl+`/api/user/users/${id}`, config);
     dispatch({
       type: GET_USER_ADMIN_SUCCESS,
       payload: data,
@@ -318,6 +332,8 @@ const getUserDetailAdmin = id => async (dispatch, getState) => {
 
 const updateUserDetailAdmin = (user, id) => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: UPDATE_USER_ADMIN_REQUEST,
     });
@@ -330,7 +346,7 @@ const updateUserDetailAdmin = (user, id) => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.put(API_URL+`/api/user/users/${id}`, user, config);
+    const { data } = await axios.put(apiUrl+`/api/user/users/${id}`, user, config);
 
     dispatch({
       type: UPDATE_USER_ADMIN_SUCCESS,
@@ -354,6 +370,8 @@ const updateUserDetailAdmin = (user, id) => async (dispatch, getState) => {
 
 const deleteUser = id => async (dispatch, getState) => {
   try {
+    const { apiConfig } = getState();
+    const apiUrl = apiConfig.apiUrl;
     dispatch({
       type: USER_ADMIN_DELETE_REQUEST,
     });
@@ -366,7 +384,7 @@ const deleteUser = id => async (dispatch, getState) => {
         Authorization: userInfo.token,
       },
     };
-    await axios.delete(API_URL+`/api/user/users/${id}`, config);
+    await axios.delete(apiUrl+`/api/user/users/${id}`, config);
 
     dispatch({
       type: USER_ADMIN_DELETE_SUCCESS,

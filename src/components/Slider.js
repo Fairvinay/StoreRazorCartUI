@@ -14,14 +14,17 @@ const Slider = () => {
   }, [dispatch]);
 
   const topProd = useSelector(state => state.productTopRated);
-  const { loading, error, products = []  } = topProd;
+  const { loading, error ,  products =[]} = topProd;
+   let tr = products['products'];
   return loading ? (
     <Loader />
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
+    <>  <p> <span> products :  {typeof products}</span> 
+        products :  {JSON.stringify(tr, null, 2)} </p>
     <Carousel className="bg-dark">
-      {products &&
+    {/*   */} {products &&
         products.map(product => (
           <Carousel.Item key={product._id} interval={5000}>
             <Link to={`/product/${product._id}`}>
@@ -33,8 +36,8 @@ const Slider = () => {
               </Carousel.Caption>
             </Link>
           </Carousel.Item>
-        ))}
-    </Carousel>
+        ))}  
+    </Carousel></>
   );
 };
 

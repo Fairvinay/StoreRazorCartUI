@@ -10,9 +10,12 @@ import {
   __STORENOTIFY_PAYMENT_METHOD,
   __STORENOTIFY_SHIPPING_ADDRESS,
 } from "../constants/localStrorageConstant";
-import { API_URL } from '../config';
+//import { API_URL } from '../config';
 const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(API_URL+`/api/products/${id}`);
+  const { apiConfig } = getState();
+  const apiUrl = apiConfig.apiUrl;
+
+  const { data } = await axios.get(`${apiUrl}/api/products/${id}`);
 
   dispatch({
     type: CART_ADD_ITEM,

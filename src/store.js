@@ -38,9 +38,11 @@ import {
   orderPayReducer,
   updateOrderReducer,
 } from "./reducers/orderReducers";
+import apiConfigReducer from './reducers/apiConfigReducer'; // ✅ no curly braces
 /* import modelsReducer from './reducers/data/modelReducer';
 most probably this above import code already emebed in productAction.js */
 const reducer = combineReducers({
+  apiConfig: apiConfigReducer,
   productList: productListReducer,
   filterProduct: filterProductsReducer,
   productDetail: productDetailReducer,

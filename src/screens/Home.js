@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "react-bootstrap";
 import Product from "../components/Product";
 import { __STORENOTIFY_USERINFO } from "../constants/localStrorageConstant";
-import {
+/*import {
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_REQUEST,
@@ -27,16 +27,16 @@ import {
   PRODUCT_TOP_RATED_FAIL,
   PRODUCT_FILTER_REQUEST,
   PRODUCT_FILTER_SUCCESS,
-} from "../constants/productConstants";
+} from "../constants/productConstants";*/
 import { listProducts } from "../actions/productActions";
 import Paginate from "../components/Paginate";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
-import Slider from "../components/Slider";
+//import Slider from "../components/Slider";
 import Title from "../components/Title";
 import Filter from "../components/Filter";
-
+import '../styles/home-products.css';
 const Home = () => {
   const dispatch = useDispatch();
 
@@ -109,14 +109,20 @@ const Home = () => {
             <Message variant="danger">{error}</Message>
           ) : (
             <>
-              <Filter products={products} />
-              <Row>
+        <Filter products={products} />
+         <div id="pricee-widget">
+          <div className="k_prc_wrp" id="pricee-widget-products">
+           <div className="k_prc"> 
+              <Row className="slider slide1 prc-slider">
                 {products.map(product => (
                   <Col key={product._id} sm={12} md={6} lg={6} xl={3}>
                     <Product product={product} isAllowed={isAllowed}/>
                   </Col>
                 ))}
               </Row>
+           </div>
+          </div>
+         </div>
               <Paginate
                 page={page}
                 pages={pages}

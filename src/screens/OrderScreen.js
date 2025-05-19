@@ -19,9 +19,11 @@ import {
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
 import Title from "../components/Title";
-import { API_URL } from '../config';
+//import { API_URL } from '../config';
 
 const OrderScreen = () => {
+
+  const apiUrl = useSelector((state) => state.apiConfig.apiUrl); // 🔥 here
   const dispatch = useDispatch();
   const { id } = useParams();
   const history = useHistory();
@@ -42,13 +44,15 @@ const OrderScreen = () => {
   const [isDelivered, setIsDelivered] = useState(false);
 
   async function displayRazorpay() {
-    const { data: clientId } = await axios.get("/api/config/razorpay");
+   
+
+    const { data: clientId } = await axios.get(apiUrl+"/api/config/razorpay");
     const authConfig = {
       headers: {
         Authorization: userInfo.token,
       },
     };
-    const { data } = await axios.post(API_URL+`/api/orders/${id}`, "", authConfig);
+    const { data } = await axios.post(apiUrl+`/api/orders/${id}`, "", authConfig);
     const { amount, currency, orderId } = data;
 
     const options = {
