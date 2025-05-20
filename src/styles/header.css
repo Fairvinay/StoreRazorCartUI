@@ -2,6 +2,9 @@
     background-color: #f0f0f0; /* light gray or any pastel */
     color: #212529;
   }
+  .navbar{
+    padding:0.05rem 0.05rem !important;
+  }
 .a-headerText {
   font-size: 26px;
 }
