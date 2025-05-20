@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button, Col } from "react-bootstrap";
+import {   Row  } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
@@ -32,20 +33,39 @@ const PaymentScreen = () => {
         <CheckoutSteps step1 step2 step3 />
         <h1>Payment Method</h1>
         <Form onSubmit={submitHandler}>
-          <Form.Group>
-            <Form.Label as="legend">Select Method</Form.Label>
-            <Col>
+        <Form.Group as="fieldset" className="mb-4">
+          <Form.Label as="legend" className="fw-semibold">
+            Select Payment Method
+          </Form.Label>
+          <Row className="mt-2 ps-2">
+            <Col xs={12} md={6}>
               <Form.Check
                 type="radio"
-                label="Razorpay UPI Debit Credit Card"
                 id="Razorpay"
                 name="paymentMethod"
+                label="Razorpay UPI / Debit / Credit Card"
                 value="Razorpay"
-                checked
-                onChange={e => setPaymentMethod(e.target.value)}
-              ></Form.Check>
+                checked={paymentMethod === "Razorpay"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
             </Col>
-          </Form.Group>
+            <Col xs={12} md={6}>
+              <Form.Check
+                type="radio"
+                id="COD"
+                name="paymentMethod"
+                label="Cash on Delivery"
+                value="COD"
+                checked={paymentMethod === "COD"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              />
+            </Col>
+            {/* Optional: Add more options here */}
+            {/* 
+           
+            */}
+          </Row>
+        </Form.Group>
           <Button type="submit" variant="primary">
             Continue
           </Button>
