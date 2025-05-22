@@ -1,0 +1,15 @@
+[build]
+  command = "npm run rebuild"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20.16.0"
+
+[[headers]]
+for = "/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    Content-Security-Policy = "frame-ancestors *"
+    X-XSS-Protection = "1; mode=block"
+    X-Robots-Tag = "index"
+    Cache-Control = "public, max-age=0, no-cache, no-store, must-revalidate"
