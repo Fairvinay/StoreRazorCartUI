@@ -1,7 +1,6 @@
-#/*
-# X-Frame-Options: allow-from https://storenotify.in ,  http://localhost:4200/ , https://5j3c1fv094.execute-api.us-east-1.amazonaws.com , #https://atmdemoaivenmysql.onrender.com , https://rzp.io/ , https://frabjous-truffle-675e06.netlify.app
-   
+ 
 /*
+ X-Frame-Options: allow-from https://storenotify.in ,  http://localhost:4200/ 
  Content-Security-Policy: frame-ancestors 'self' https://storenotify.in http://localhost:4200 https://rzp.io
  #Content-Security-Policy: frame-ancestors https://storenotify.in http://localhost:4200 https://rzp.io
  
