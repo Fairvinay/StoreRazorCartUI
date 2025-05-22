@@ -5,14 +5,16 @@
 [build.environment]
   NODE_VERSION = "20.16.0"
 
+
 [[headers]]
-for = "/*"
+  for = "/*"
   [headers.values]
-    X-Frame-Options = "ALLOWALL"
-    Content-Security-Policy = "frame-ancestors *"
-    X-XSS-Protection = "1; mode=block"
+   Content-Security-Policy = "frame-ancestors 'self' https://storenotify.in http://localhost:4200 https://atmdemoaivenmysql.onrender.com https://rzp.io"
+     X-XSS-Protection = "1; mode=block"
     X-Robots-Tag = "index"
     Cache-Control = "public, max-age=0, no-cache, no-store, must-revalidate"
+
+
 [[headers]]
 for = "/api/*"
   [headers.values]
