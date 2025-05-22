@@ -1,0 +1,9 @@
+/*
+ X-Frame-Options: allow-from https://storenotify.in ,  http://localhost:4200/ , https://5j3c1fv094.execute-api.us-east-1.amazonaws.com , https://atmdemoaivenmysql.onrender.com , https://rzp.io/ , https://frabjous-truffle-675e06.netlify.app
+   
+
+ X-XSS-Protection: 0;
+
+/api/*
+ Access-Control-Allow-Origin: https://sheer-maryjo-storenotify-4c573750.koyeb.app,http://localhost:4200,http://localhost:3450,http://localhost:8888,https://storenotiftycom.netlify.app, https://atmdemoaivenmysql.onrender.com , https://rzp.io
+ Content-Security-Policy: script-src 'self' https://storegoods-storenotify.netlify.app
