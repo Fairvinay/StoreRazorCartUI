@@ -3,8 +3,6 @@
   Content-Security-Policy: frame-ancestors https://storenotify.in http://localhost:4200;
 
 
-
-
  X-XSS-Protection: 0;
 
 /api/*
