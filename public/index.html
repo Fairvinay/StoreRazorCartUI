@@ -14,6 +14,17 @@
   </head>
   <body><noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
- 
+    <script type="text/javascript">
+      
+
+function sendHeightToParent() {
+			    const height = document.body.scrollHeight;
+			    parent.postMessage({ iframeHeight: height }, '*');
+  			}
+
+		  window.addEventListener('load', sendHeightToParent);
+		  window.addEventListener('resize', sendHeightToParent);
+    </script>
+
   </body>
 </html>
