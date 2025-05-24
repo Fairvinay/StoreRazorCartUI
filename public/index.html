@@ -15,16 +15,41 @@
   <body><noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script type="text/javascript">
+      minHeight = 900; prevHeight = 0;
+      parentURL = 'https://storenotify.in';
+      // Listen for parent message
+  window.addEventListener('message', (event) => {
+    if (event.origin !== parentURL) return;
+    console.log('Received message from parent:', event.data);
+     document.body.scrollHeight =event.data.iframeHeight;
+     prevHeight = document.body.style.minHeight;
+     let height = document.body.scrollHeight;
 
-
+     document.body.style.minHeight = height + 'px';
+     if(height >=  (prevHeight+100 ) || height <=  (prevHeight-100 )){ 
+      console.log("height not changed"  ); }else  {
+     // event.source.postMessage({ iframeHeight: minHeight }, '*');
+          }
+     
+    // Reply back to parent
+    //event.source.postMessage({ message: 'HELLO_FROM_IFRAME' }, event.origin);
+  });
 function sendHeightToParent() {
-			    const height = document.body.scrollHeight;
+			    let height = document.body.scrollHeight;
+          if(height < minHeight) height = minHeight;
           console.log("document scroll height: ", height);
-			    parent.postMessage({ iframeHeight: height }, '*');
+          console.log("document minHeight: ", document.body.style.minHeight);
+          console.log("document height: ",  document.height);
+          document.body.style.minHeight = height + 'px';
+          console.log("document minHeight: ", document.body.style.minHeight);
+          if(height >=  (prevHeight+100 ) || height <=  (prevHeight-100 )){ console.log("height not changed"  ); }else  {
+             parent.postMessage({ iframeHeight: height }, '*');
+          }
+			   
   			}
 
 		  window.addEventListener('load', sendHeightToParent);
-		  window.addEventListener('resize', sendHeightToParent);
+		 // window.addEventListener('resize', sendHeightToParent);
     </script>
 
   </body>
