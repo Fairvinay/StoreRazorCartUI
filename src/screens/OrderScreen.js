@@ -98,7 +98,7 @@ const OrderScreen = () => {
               }
              );
 
-
+          loadPaymentLinkIfIframe();
           setPayment(payResp);
           setOrderPaid(true);
           dispatch(payOrder(id, paymentResult));
@@ -110,20 +110,25 @@ const OrderScreen = () => {
     const paymentWindow = new window.Razorpay(options);
     paymentWindow.open();
   }
-
-  useEffect(() => {
-    if (!userInfo) {
-      history.push("/login");
-    }
-
-    const loadScript = url => {
+   const loadScript = url => {
       const script = document.createElement("script");
       script.src = url;
       document.body.appendChild(script);
       script.onload = () => {
         setSdkReady(true);
       };
-    };
+    }; 
+
+  function loadPaymentLinkIfIframe() {
+       loadScript("../js/encloseLinkIfIframeCheckout.js");
+  }
+	
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+
+     
 
     if (!order || successPay || order._id !== id) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -320,7 +325,8 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Razor Pay Payment ID:</Col>
-                  <Col>{/* payment_id */} {payment.payment_id}</Col>
+                  <Col id="payDiv">{/* payment_id */}
+                  <span id="payId">   {payment.payment_id} </span> </Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
