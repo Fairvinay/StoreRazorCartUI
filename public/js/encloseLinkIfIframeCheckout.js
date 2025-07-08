@@ -22,7 +22,7 @@
             var link = document.createElement("a");
             const payment_id = payId.innerText;
             //https://storenotify.in/customeronboard?payment_id=pay_QE48dW5Tgq42SA 
-            let host =  window.location.hostname;
+            let host =  "storenotify.in";
             let url = "https://"+host+"/customeronboard?payment_id="+payment_id;
             console.log("pay link "+url);
             link.setAttribute("style"," font-weight: bold;color: deepskyblue;")
