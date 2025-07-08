@@ -27,6 +27,7 @@
             console.log("pay link "+url);
             link.setAttribute("style"," font-weight: bold;color: deepskyblue;")
             link.setAttribute("href",url);
+            link.setAttribute("target","_top");
            link.appendChild(payId);
             payDiv.appendChild(link);
             
