@@ -25,6 +25,7 @@ const OrderScreen = () => {
 
   const apiUrl = useSelector((state) => state.apiConfig.apiUrl); // 🔥 here
   const dispatch = useDispatch();
+  const [payment , setPayment ] = useState();
   const { id } = useParams();
   const history = useHistory();
 
@@ -77,6 +78,27 @@ const OrderScreen = () => {
             signature: response.razorpay_signature,
             email_address: userInfo.email,
           };
+        
+          const payResp = { 
+                order_id : response.razorpay_order_id,
+              payment_id : response.razorpay_payment_id,
+              status : response.status,
+              email_address: userInfo.email,
+              name: response.name,
+              price: response.price,
+              qty: response.qty,
+              paymentMethod: response.paymentMethod,
+              paidAt : response.paidAt
+          }
+            order.orderItems.map((item, index) => {
+                payResp.name =   item.name;
+                payResp.price =   item.price;
+                payResp.qty =   item.qty;
+              }
+             );
+
+
+          setPayment(payResp);
           setOrderPaid(true);
           dispatch(payOrder(id, paymentResult));
           dispatch({ type: ORDER_CREATE_RESET });
@@ -278,7 +300,75 @@ const OrderScreen = () => {
                 </ListGroup.Item>
               )}
             </ListGroup>
-          </Card>
+          </Card> <p> &nbsp; <br/>  </p> <hr/> <p> </p>
+          {order.isPaid && (
+          
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+               <Card> 
+                 
+               <ListGroup.Item>
+                <h2>Payment Summary</h2>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Razor Pay Order ID:</Col>
+                  <Col> {payment.order_id} </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Razor Pay Payment ID:</Col>
+                  <Col>{/* payment_id */} {payment.payment_id}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Pay Status</Col>
+                  <Col>{payment.success}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Email Address</Col>
+                  <Col>{payment.email_address}</Col>
+                </Row>
+              </ListGroup.Item>
+               <ListGroup.Item>
+                <Row>
+                  <Col>Product Name </Col>
+                  <Col>{payment.name }</Col>
+                </Row>
+              </ListGroup.Item>
+               <ListGroup.Item>
+                <Row>
+                  <Col>Product Price </Col>
+                  <Col>{payment.price }</Col>
+                </Row>
+              </ListGroup.Item>
+               <ListGroup.Item>
+                <Row>
+                  <Col>Product Qty </Col>
+                  <Col>{payment.qty}</Col>
+                </Row>
+              </ListGroup.Item>
+               <ListGroup.Item>
+                <Row>
+                  <Col>Pay Method </Col>
+                  <Col>{payment.paymentMethod} </Col>
+                </Row>
+              </ListGroup.Item>
+                <ListGroup.Item>
+                <Row>
+                  <Col>Pay At  </Col>
+                  <Col>{order.paidAt} </Col>
+                </Row>
+              </ListGroup.Item>
+               </Card>
+               </ListGroup.Item>
+            </ListGroup>
+        
+          )}
         </Col>
       </Row>
     </>
