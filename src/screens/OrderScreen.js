@@ -94,6 +94,7 @@ const OrderScreen = () => {
                 payResp.name =   item.name;
                 payResp.price =   item.price;
                 payResp.qty =   item.qty;
+		return payResp ;
               }
              );
 
